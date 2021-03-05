@@ -38,6 +38,7 @@ function checkGameStatus() {
     if (gameStatus !== ''){
         document.getElementById('game-status').innerHTML = 'Winner : ' + gameStatus.toUpperCase();
         document.getElementById('new-game').disabled = false;
+        document.getElementById('give-up').disabled = true;
     }
 }
 
@@ -88,5 +89,18 @@ window.addEventListener("DOMContentLoaded", (event) => {
             document.getElementById(`square-${i}`).innerHTML = "";
         }
         document.getElementById('new-game').disabled = true;
+        document.getElementById('give-up').disabled = false;
     });
+    const giveUp = document.getElementById('give-up');
+    giveUp.addEventListener("click", event =>{
+        if (currentPlayerSymbol === 'x'){
+            gameStatus = 'o'
+        }
+        else if (currentPlayerSymbol === 'o'){
+            gameStatus = 'x'
+        }
+        checkGameStatus();
+        document.getElementById('give-up').disabled = true;
+        document.getElementById('new-game').disabled = false;
+    })
 });
