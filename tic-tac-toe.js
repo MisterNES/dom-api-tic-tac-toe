@@ -30,11 +30,14 @@ function checkGameStatus() {
     else if (squareValues[0] === squareValues[4] && squareValues[4] === squareValues[8] && squareValues[8] !== ''){
         gameStatus = currentPlayerSymbol;
     }
-    // else {
-    //     gameStatus = 'None'
-    // }
+    else if (!squareValues.includes("")){
+        gameStatus = 'None';
+        document.getElementById('game-status').innerHTML = 'Winner : ' + gameStatus.toUpperCase();
+        document.getElementById('new-game').disabled = false;
+    }
     if (gameStatus !== ''){
         document.getElementById('game-status').innerHTML = 'Winner : ' + gameStatus.toUpperCase();
+        document.getElementById('new-game').disabled = false;
     }
 }
 
@@ -74,5 +77,16 @@ window.addEventListener("DOMContentLoaded", (event) => {
             currentPlayerSymbol = "x";
         }
 
+    });
+    const newGame = document.getElementById("new-game");
+    newGame.addEventListener("click", (event) => {
+        currentPlayerSymbol = "x";
+        squareValues = ["", "", "", "", "", "", "", "", "",];
+        gameStatus = "";
+        document.getElementById('game-status').innerHTML = "";
+        for (let i = 0; i < 9; i++){
+            document.getElementById(`square-${i}`).innerHTML = "";
+        }
+        document.getElementById('new-game').disabled = true;
     });
 });
